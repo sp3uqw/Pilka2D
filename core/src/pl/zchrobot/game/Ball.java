@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.graphics.Color;
 
+import java.util.Random;
 
 /**
  * Created by Zybi on 12.02.2017.
@@ -27,7 +28,7 @@ public class Ball {
     Fixture fixture;
 
 
-    public Ball(Vector2 position, float radius, Color color, float screenHeight, float screenWidth, World world ) {
+    public Ball(Vector2 position, float radius, Color color, float screenHeight, float screenWidth, float gravityScale, World world ) {
 
         this.p = position;
         this.radius = radius;
@@ -49,9 +50,10 @@ public class Ball {
         fixtureDef.shape = circle;
         fixtureDef.density = 0.6f;
         fixtureDef.friction = 0.4f;
-        fixtureDef.restitution = 1.5f; // Make it bounce a little bit
+        fixtureDef.restitution = 0.9f; // Make it bounce a little bit
         fixture = body.createFixture(fixtureDef); // Create our fixture and attach it to the body
-        body.setGravityScale(5f);
+
+        body.setGravityScale(gravityScale);
         circle.dispose();
 
     }

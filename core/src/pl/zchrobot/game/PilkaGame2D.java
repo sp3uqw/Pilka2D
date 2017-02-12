@@ -10,11 +10,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2D;
-
 import com.badlogic.gdx.physics.box2d.World;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
+import java.util.Random;
 
 
 public class PilkaGame2D extends ApplicationAdapter {
@@ -35,7 +35,6 @@ public class PilkaGame2D extends ApplicationAdapter {
     Walls wall;
     Ball b1, b2, b3;
 
-
 	@Override
 	public void create () {
 
@@ -44,15 +43,19 @@ public class PilkaGame2D extends ApplicationAdapter {
         batch = new SpriteBatch();
         font = new BitmapFont();
 
+        long seed = System.currentTimeMillis();
+        Random r = new Random(seed);
+
+
+
+        // box2d start
 		Box2D.init();
 		world = new World(new Vector2(0, -10f), true);
 
         wall = new Walls(Color.BLACK,H, W,world);
-        b1 = new Ball( new Vector2(W/10, H-RADIUS), RADIUS, Color.GREEN, H,W , world );
-        b2 = new Ball( new Vector2(W/10*2, H-RADIUS), RADIUS, Color.RED, H,W , world );
-        b3 = new Ball( new Vector2(W/10*3, H-RADIUS), RADIUS, Color.BLUE, H,W , world );
-
-
+        b1 = new Ball( new Vector2(W/10, H-RADIUS), RADIUS, Color.GREEN, H,W , 5f,world );
+        b2 = new Ball( new Vector2(W/10*2, H-RADIUS), RADIUS, Color.RED, H,W , 3f, world );
+        b3 = new Ball( new Vector2(W/10*3, H-RADIUS), RADIUS, Color.BLUE, H,W , 1f,world );
 
 	}
 
