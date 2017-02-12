@@ -1,24 +1,16 @@
 package pl.zchrobot.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+
+
 /**
  * Created by Zybi on 12.02.2017.
  */
@@ -38,38 +30,28 @@ public class Ball {
     public Ball(Vector2 position, float radius, Color color, float screenHeight, float screenWidth, World world ) {
 
         this.p = position;
-
         this.radius = radius;
         this.screenHeight = screenHeight;
         this.screenWidth = screenWidth;
         this.color = color;
-
 
         // box2d
         // Body
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody; // We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody
         bodyDef.position.set(p.x, p.y); // Set our body's starting position in the world
-
-
         body = world.createBody(bodyDef); // Create our body in the world using our body definition
-
-
-
         // body shape
         CircleShape circle = new CircleShape();
         circle.setRadius(radius);
-
         //
         fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
-
         fixtureDef.density = 0.6f;
         fixtureDef.friction = 0.4f;
-        fixtureDef.restitution = 1.0f; // Make it bounce a little bit
-
+        fixtureDef.restitution = 1.5f; // Make it bounce a little bit
         fixture = body.createFixture(fixtureDef); // Create our fixture and attach it to the body
-
+        body.setGravityScale(5f);
         circle.dispose();
 
     }
@@ -79,7 +61,6 @@ public class Ball {
         // animacja
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         renderer.setColor(color);
-
         float x = this.body.getPosition().x;
         float y = this.body.getPosition().y;
 
