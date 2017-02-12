@@ -32,11 +32,15 @@ public class PilkaGame2D extends ApplicationAdapter {
     float H = 30f;
     float RADIUS = W/30;
 
-    Walls wall;
+    Wall wall;
     Ball b1, b2, b3;
 
 	@Override
 	public void create () {
+
+        // box2d start
+        Box2D.init();
+        world = new World(new Vector2(0, -10f), true);
 
         renderer = new ShapeRenderer();
         viewport = new FitViewport(W,H);
@@ -46,13 +50,8 @@ public class PilkaGame2D extends ApplicationAdapter {
         long seed = System.currentTimeMillis();
         Random r = new Random(seed);
 
-
-
-        // box2d start
-		Box2D.init();
-		world = new World(new Vector2(0, -10f), true);
-
-        wall = new Walls(Color.BLACK,H, W,world);
+        // physicall objects
+        wall = new Wall(Color.BLACK,H, W,world);
         b1 = new Ball( new Vector2(W/10, H-RADIUS), RADIUS, Color.GREEN, H,W , 5f,world );
         b2 = new Ball( new Vector2(W/10*2, H-RADIUS), RADIUS, Color.RED, H,W , 3f, world );
         b3 = new Ball( new Vector2(W/10*3, H-RADIUS), RADIUS, Color.BLUE, H,W , 1f,world );

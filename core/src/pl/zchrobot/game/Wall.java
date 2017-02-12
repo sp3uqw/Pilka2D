@@ -14,9 +14,9 @@ import com.badlogic.gdx.graphics.Color;
  * Klasa reprezentujaca sciany
  */
 
-public class Walls {
+public class Wall {
     private Color color;
-    private float sW, sH;
+    private float W, H;
 
 
     float BELKA_HEIGHT;
@@ -25,20 +25,18 @@ public class Walls {
 
 
 
-    public Walls(Color color, float screenHeight, float screenWidth, World world ) {
+    public Wall(Color color, float screenHeight, float screenWidth, World world ) {
 
         this.color = color;
-        this.sW = screenWidth;
-        this.sH = screenHeight;
-        BELKA_X = sW/2;
-        BELKA_Y = sH/2;
-        BELKA_HEIGHT = sH/20;
-        BELKA_WIDTH = sW/4;
-
+        this.W = screenWidth;
+        this.H = screenHeight;
+        BELKA_X = W /2;
+        BELKA_Y = H /2;
+        BELKA_HEIGHT = H /20;
+        BELKA_WIDTH = W /4;
 
         sciana(world);
 
-        //katy(world);
     }
 
 
@@ -51,28 +49,11 @@ public class Walls {
         renderer.rect(BELKA_X - (BELKA_WIDTH/2), BELKA_Y - (BELKA_HEIGHT/2), BELKA_WIDTH, BELKA_HEIGHT);
         renderer.end();
 
-    }
+        renderer.begin(ShapeRenderer.ShapeType.Line);
+        renderer.setColor(color);
+        renderer.rect(0,0,W, H);
+        renderer.end();
 
-
-    private void katy(World world)   {
-
-        // Create our body definition
-        BodyDef groundBodyDef = new BodyDef();
-        // Set its world position
-        groundBodyDef.position.set(new Vector2(0, 1f));
-
-        // Create a body from the defintion and add it to the world
-        Body groundBody = world.createBody(groundBodyDef);
-
-        // Create a polygon shape
-        PolygonShape groundBox = new PolygonShape();
-        // Set the polygon shape as a box which is twice the size of our view port and 20 high
-        // (setAsBox takes half-width and half-height as arguments)
-        groundBox.setAsBox(sW, 1f);
-        // Create a fixture from our polygon shape and add it to our ground body
-        groundBody.createFixture(groundBox, 0.0f);
-        // Clean up after ourselves
-        groundBox.dispose();
     }
 
 
@@ -85,7 +66,7 @@ public class Walls {
         Body groundBody = world.createBody(gBodyDef0);  // Create a body from the defintion and add it to the world
 
         PolygonShape boxFloor = new PolygonShape ();   // Create a polygon shape
-        boxFloor.setAsBox(sW, 0.0f);
+        boxFloor.setAsBox(W, 0.0f);
 
         groundBody.createFixture(boxFloor, 0.0f);          // Create a fixture from our polygon shape and add it to our ground body
         boxFloor.dispose();                                // Clean up after ourselves
@@ -93,11 +74,11 @@ public class Walls {
         // -----------------------------------------------------------------------------------------------------------------
         // sciana prawa
         BodyDef gBodyDef1 = new BodyDef();               // Create our body definition
-        gBodyDef1.position.set(new Vector2(sW, 0.5f));      // Set its world position
+        gBodyDef1.position.set(new Vector2(W, 0.5f));      // Set its world position
         Body groundBody1 = world.createBody(gBodyDef1);  // Create a body from the defintion and add it to the world
 
         PolygonShape boxLeft = new PolygonShape ();   // Create a polygon shape
-        boxLeft.setAsBox(0.5f, sH);
+        boxLeft.setAsBox(0.5f, H);
 
         groundBody1.createFixture(boxLeft, 0.0f);          // Create a fixture from our polygon shape and add it to our ground body
         boxLeft.dispose();                                // Clean up after ourselves
@@ -109,7 +90,7 @@ public class Walls {
         Body groundBody2 = world.createBody(gBodyDef2);  // Create a body from the defintion and add it to the world
 
         PolygonShape boxRight = new PolygonShape ();   // Create a polygon shape
-        boxLeft.setAsBox(0.5f, sH);
+        boxLeft.setAsBox(0.5f, H);
 
         groundBody2.createFixture(boxRight, 0.0f);          // Create a fixture from our polygon shape and add it to our ground body
         boxLeft.dispose();                                // Clean up after ourselves
@@ -118,11 +99,11 @@ public class Walls {
         // -----------------------------------------------------------------------------------------------------------------
         // sufit
         BodyDef gBodyDef3 = new BodyDef();              // Create our body definition
-        gBodyDef3.position.set(new Vector2(0, sH));   // Set its world position
+        gBodyDef3.position.set(new Vector2(0, H));   // Set its world position
         Body groundBody3 = world.createBody(gBodyDef3);  // Create a body from the defintion and add it to the world
 
         PolygonShape boxTop = new PolygonShape ();   // Create a polygon shape
-        boxTop.setAsBox(sW, 1f);
+        boxTop.setAsBox(W, 1f);
 
         groundBody3.createFixture(boxTop, 0.0f);          // Create a fixture from our polygon shape and add it to our ground body
         boxTop.dispose();                                // Clean up after ourselves

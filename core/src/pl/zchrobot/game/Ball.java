@@ -14,6 +14,7 @@ import java.util.Random;
 
 /**
  * Created by Zybi on 12.02.2017.
+ * Klasa reprezentujaca pilke
  */
 
 public class Ball {
@@ -45,12 +46,12 @@ public class Ball {
         // body shape
         CircleShape circle = new CircleShape();
         circle.setRadius(radius);
-        //
+
         fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
         fixtureDef.density = 0.6f;
-        fixtureDef.friction = 0.4f;
-        fixtureDef.restitution = 0.9f; // Make it bounce a little bit
+        fixtureDef.friction = 0.0f;         // tarcie
+        fixtureDef.restitution = 0.9f;      // Make it bounce a little bit
         fixture = body.createFixture(fixtureDef); // Create our fixture and attach it to the body
 
         body.setGravityScale(gravityScale);
@@ -65,7 +66,6 @@ public class Ball {
         renderer.setColor(color);
         float x = this.body.getPosition().x;
         float y = this.body.getPosition().y;
-
         renderer.circle(x,y,radius,64);
         renderer.end();
 
