@@ -19,22 +19,23 @@ import java.util.Random;
 
 public class Ball {
 
-    Vector2 p;
-    float radius, screenHeight, screenWidth;
-    Color color;
+    private Vector2 p;
+    private float radius;
+    private Color color;
+
     // box2d
-    BodyDef bodyDef;
-    FixtureDef fixtureDef;
+    private BodyDef bodyDef;
+    private FixtureDef fixtureDef;
+    private Fixture fixture;
+
     Body body;
-    Fixture fixture;
 
 
-    public Ball(Vector2 position, float radius, Color color, float screenHeight, float screenWidth, float gravityScale, World world ) {
+    public Ball(Vector2 position, float radius, Color color, float gravityScale, World world ) {
 
         this.p = position;
         this.radius = radius;
-        this.screenHeight = screenHeight;
-        this.screenWidth = screenWidth;
+
         this.color = color;
 
         // box2d

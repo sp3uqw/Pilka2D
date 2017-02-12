@@ -15,13 +15,13 @@ import com.badlogic.gdx.graphics.Color;
  */
 
 public class Wall {
+
     private Color color;
     private float W, H;
 
-
-    float BELKA_HEIGHT;
-    float BELKA_WIDTH;
-    float BELKA_X, BELKA_Y; // srodek belki
+    private float BELKA_HEIGHT;
+    private float BELKA_WIDTH;
+    private float BELKA_X, BELKA_Y; // srodek belki
 
 
 

@@ -18,22 +18,23 @@ import java.util.Random;
 
 
 public class PilkaGame2D extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-    BitmapFont font;
 
-    ShapeRenderer renderer;
+    private SpriteBatch batch;
+    private Texture img;
+    private BitmapFont font;
+
+    private ShapeRenderer renderer;
     private FitViewport viewport;
 
-    Body body;
-    World world;
+    private Body body;
+    private World world;
 
-    float W = 40f;
-    float H = 30f;
-    float RADIUS = W/30;
+    private float W = 40f;
+    private float H = 30f;
+    private float RADIUS = W/30;
 
-    Wall wall;
-    Ball b1, b2, b3;
+    private Wall wall;
+    private Ball b1, b2, b3;
 
 	@Override
 	public void create () {
@@ -52,9 +53,10 @@ public class PilkaGame2D extends ApplicationAdapter {
 
         // physicall objects
         wall = new Wall(Color.BLACK,H, W,world);
-        b1 = new Ball( new Vector2(W/10, H-RADIUS), RADIUS, Color.GREEN, H,W , 5f,world );
-        b2 = new Ball( new Vector2(W/10*2, H-RADIUS), RADIUS, Color.RED, H,W , 3f, world );
-        b3 = new Ball( new Vector2(W/10*3, H-RADIUS), RADIUS, Color.BLUE, H,W , 1f,world );
+        // balls
+        b1 = new Ball( new Vector2(W/10, H-RADIUS), RADIUS, Color.GREEN, 5f,world );
+        b2 = new Ball( new Vector2(W/10*2, H-RADIUS), RADIUS, Color.RED, 3f, world );
+        b3 = new Ball( new Vector2(W/10*3, H-RADIUS), RADIUS, Color.BLUE, 1f,world );
 
 	}
 
