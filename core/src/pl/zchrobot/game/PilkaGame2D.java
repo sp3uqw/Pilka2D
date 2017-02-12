@@ -41,7 +41,7 @@ public class PilkaGame2D extends ApplicationAdapter {
 
         // box2d start
         Box2D.init();
-        world = new World(new Vector2(0, -10f), true);
+        world = new World(new Vector2(0, -10f), false); // false to avoid sleep of objects
 
         renderer = new ShapeRenderer();
         viewport = new FitViewport(W,H);
@@ -57,7 +57,6 @@ public class PilkaGame2D extends ApplicationAdapter {
         b1 = new Ball( new Vector2(W/10, H-RADIUS), RADIUS, Color.GREEN, 5f,world );
         b2 = new Ball( new Vector2(W/10*2, H-RADIUS), RADIUS, Color.RED, 3f, world );
         b3 = new Ball( new Vector2(W/10*3, H-RADIUS), RADIUS, Color.BLUE, 1f,world );
-
 	}
 
 	@Override
