@@ -24,14 +24,45 @@ public class Ball {
     private Color color;
 
     // box2d
-    Body body;
+    private Body body;
 
+    private Random r = new Random();
+
+
+    public Ball(World world) {
+
+        this.p = new Vector2(r.nextFloat()*Const.W, r.nextFloat()*Const.H);
+        this.radius = Const.RADIUS;
+        this.color = new Color(r.nextFloat(), r.nextFloat(), r.nextFloat(),1f);
+
+        // box2d
+        // Body
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody; // We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody
+        bodyDef.position.set(p.x, p.y); // Set our body's starting position in the world
+        body = world.createBody(bodyDef); // Create our body in the world using our body definition
+        // body shape
+        CircleShape circle = new CircleShape();
+        circle.setRadius(radius);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = circle;
+        fixtureDef.density = 0.6f;
+        fixtureDef.friction = 0.1f;         // tarcie
+        fixtureDef.restitution = 0.6f;      // Make it bounce a little bit
+        Fixture fixture = body.createFixture(fixtureDef); // Create our fixture and attach it to the body
+
+        body.setGravityScale(4f);
+        circle.dispose();
+
+
+
+    }
 
     public Ball(Vector2 position, float radius, Color color, float gravityScale, World world ) {
 
         this.p = position;
         this.radius = radius;
-
         this.color = color;
 
         // box2d

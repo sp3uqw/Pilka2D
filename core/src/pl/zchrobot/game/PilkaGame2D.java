@@ -29,12 +29,17 @@ public class PilkaGame2D extends ApplicationAdapter {
     private Body body;
     private World world;
 
-    private float W = 40f;
-    private float H = 30f;
-    private float RADIUS = W/30;
 
     private Wall wall;
     private Ball b1, b2, b3;
+
+
+    private float W = Const.W;
+    private float H = Const.H;
+    private float RADIUS = Const.RADIUS;
+
+
+    private Ball[] ball = new Ball[40];
 
 	@Override
 	public void create () {
@@ -44,7 +49,7 @@ public class PilkaGame2D extends ApplicationAdapter {
         world = new World(new Vector2(0, -10f), false); // false to avoid sleep of objects
 
         renderer = new ShapeRenderer();
-        viewport = new FitViewport(W,H);
+        viewport = new FitViewport(W, H);
         batch = new SpriteBatch();
         font = new BitmapFont();
 
@@ -57,6 +62,12 @@ public class PilkaGame2D extends ApplicationAdapter {
         b1 = new Ball( new Vector2(W/10, H-RADIUS), RADIUS, Color.GREEN, 5f,world );
         b2 = new Ball( new Vector2(W/10*2, H-RADIUS), RADIUS, Color.RED, 3f, world );
         b3 = new Ball( new Vector2(W/10*3, H-RADIUS), RADIUS, Color.BLUE, 1f,world );
+
+
+        for (int i = 0; i < ball.length; i++) {
+            ball[i] = new Ball(world);
+        }
+
 	}
 
 	@Override
@@ -81,16 +92,19 @@ public class PilkaGame2D extends ApplicationAdapter {
         b2.render(renderer);
         b3.render(renderer);
 
+        for (Ball b: ball)
+        {
+            b.render(renderer);
+        }
+
+
 
         batch.begin();
-        font.setColor(Color.BLUE);
-        font.getData().setScale(2);
-
-        Vector2 v1= b1.body.getLinearVelocity();
-        float v1X = (float)((int)(v1.x *1000f) /1000f);
-        float v1Y = (float)((int)(v1.y *1000f) /1000f);
-        String sV = "Vx =  " + Float.toString(v1X) + "; Vy =  " + Float.toString(v1Y);
-        font.draw(batch, sV, 10, 160);
+        font.setColor(Color.BLACK);
+        font.getData().setScale(1);
+        int fps = Gdx.graphics.getFramesPerSecond();
+        String sFps = "FPS: " + Integer.toString(fps);
+        font.draw(batch, sFps, 10, 50 );
         batch.end();
 
 	}
