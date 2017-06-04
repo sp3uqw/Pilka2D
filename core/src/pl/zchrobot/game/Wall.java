@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.graphics.Color;
@@ -68,7 +69,13 @@ public class Wall {
         PolygonShape boxFloor = new PolygonShape ();   // Create a polygon shape
         boxFloor.setAsBox(W, 0.0f);
 
-        groundBody.createFixture(boxFloor, 0.0f);          // Create a fixture from our polygon shape and add it to our ground body
+        FixtureDef podloga = new FixtureDef();
+        podloga.shape = boxFloor;
+        podloga.friction = 1.0f;
+
+        //groundBody.createFixture(boxFloor, 1.0f);          // Create a fixture from our polygon shape and add it to our ground body
+        groundBody.createFixture(podloga);
+
         boxFloor.dispose();                                // Clean up after ourselves
 
         // -----------------------------------------------------------------------------------------------------------------
@@ -80,7 +87,8 @@ public class Wall {
         PolygonShape boxLeft = new PolygonShape ();   // Create a polygon shape
         boxLeft.setAsBox(0.5f, H);
 
-        groundBody1.createFixture(boxLeft, 0.0f);          // Create a fixture from our polygon shape and add it to our ground body
+        groundBody1.createFixture(boxLeft, 1.0f);          // Create a fixture from our polygon shape and add it to our ground body
+
         boxLeft.dispose();                                // Clean up after ourselves
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -92,7 +100,7 @@ public class Wall {
         PolygonShape boxRight = new PolygonShape ();   // Create a polygon shape
         boxLeft.setAsBox(0.5f, H);
 
-        groundBody2.createFixture(boxRight, 0.0f);          // Create a fixture from our polygon shape and add it to our ground body
+        groundBody2.createFixture(boxRight, 1.0f);          // Create a fixture from our polygon shape and add it to our ground body
         boxLeft.dispose();                                // Clean up after ourselves
 
 
@@ -105,7 +113,7 @@ public class Wall {
         PolygonShape boxTop = new PolygonShape ();   // Create a polygon shape
         boxTop.setAsBox(W, 1f);
 
-        groundBody3.createFixture(boxTop, 0.0f);          // Create a fixture from our polygon shape and add it to our ground body
+        groundBody3.createFixture(boxTop, 1.0f);          // Create a fixture from our polygon shape and add it to our ground body
         boxTop.dispose();                                // Clean up after ourselves
 
 
@@ -118,6 +126,8 @@ public class Wall {
 
         PolygonShape boxBelka = new PolygonShape ();   // Create a polygon shape
         boxBelka.setAsBox(BELKA_WIDTH/2, BELKA_HEIGHT/2);
+
+
 
         groundBody4.createFixture(boxBelka, 1.0f);          // Create a fixture from our polygon shape and add it to our ground body
         boxBelka.dispose();                                // Clean up after ourselves

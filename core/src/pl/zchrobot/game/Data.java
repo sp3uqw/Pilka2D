@@ -5,10 +5,12 @@ package pl.zchrobot.game;
  * class for constant values
  */
 
-public class Const {
+public class Data {
 
-    static final float W = 40f;
-    static final float H = 30f;
+    static final float W = 400f;
+    static final float H = 300f;
     static final float RADIUS = W/30;
+
+    public static final float wielkosc = 0;
 
 }

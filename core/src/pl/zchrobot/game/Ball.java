@@ -1,5 +1,6 @@
 package pl.zchrobot.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -19,20 +20,20 @@ import java.util.Random;
 
 public class Ball {
 
-    private Vector2 p;
-    private float radius;
-    private Color color;
+    protected Vector2 p;
+    protected float radius;
+    protected Color color;
 
     // box2d
-    private Body body;
+    protected Body body;
 
-    private Random r = new Random();
+    protected Random r = new Random();
 
 
     public Ball(World world) {
 
-        this.p = new Vector2(r.nextFloat()*Const.W, r.nextFloat()*Const.H);
-        this.radius = Const.RADIUS;
+        this.p = new Vector2(r.nextFloat()* Data.W, r.nextFloat()* Data.H);
+        this.radius = Data.RADIUS;
         this.color = new Color(r.nextFloat(), r.nextFloat(), r.nextFloat(),1f);
 
         // box2d
@@ -48,8 +49,8 @@ public class Ball {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
         fixtureDef.density = 0.6f;
-        fixtureDef.friction = 0.1f;         // tarcie
-        fixtureDef.restitution = 0.6f;      // Make it bounce a little bit
+        fixtureDef.friction = 1.0f;         // tarcie
+        fixtureDef.restitution = 0.7f;      // Make it bounce a little bit
         Fixture fixture = body.createFixture(fixtureDef); // Create our fixture and attach it to the body
 
         body.setGravityScale(4f);
@@ -78,8 +79,8 @@ public class Ball {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
         fixtureDef.density = 0.6f;
-        fixtureDef.friction = 0.1f;         // tarcie
-        fixtureDef.restitution = 0.6f;      // Make it bounce a little bit
+        fixtureDef.friction = 10.0f;         // tarcie
+        fixtureDef.restitution = 0.4f;      // Make it bounce a little bit
         Fixture fixture = body.createFixture(fixtureDef); // Create our fixture and attach it to the body
 
         body.setGravityScale(gravityScale);
@@ -87,7 +88,7 @@ public class Ball {
 
     }
 
-    public void render(ShapeRenderer renderer) {
+    public void render(ShapeRenderer renderer, SpriteBatch batch) {
 
         // animacja
         renderer.begin(ShapeRenderer.ShapeType.Filled);
