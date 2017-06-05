@@ -23,7 +23,7 @@ public class Wall {
     private float BELKA_HEIGHT;
     private float BELKA_WIDTH;
     private float BELKA_X, BELKA_Y; // srodek belki
-
+    PolygonShape kulka;
 
 
     public Wall(Color color, float screenHeight, float screenWidth, World world ) {
@@ -37,6 +37,7 @@ public class Wall {
         BELKA_WIDTH = W /4;
 
         sciana(world);
+
 
     }
 
@@ -53,6 +54,9 @@ public class Wall {
         renderer.begin(ShapeRenderer.ShapeType.Line);
         renderer.setColor(color);
         renderer.rect(0,0,W, H);
+        // TODO - dokonczyc polygon
+        //renderer.polygon();
+
         renderer.end();
 
     }
@@ -127,11 +131,20 @@ public class Wall {
         PolygonShape boxBelka = new PolygonShape ();   // Create a polygon shape
         boxBelka.setAsBox(BELKA_WIDTH/2, BELKA_HEIGHT/2);
 
-
-
         groundBody4.createFixture(boxBelka, 1.0f);          // Create a fixture from our polygon shape and add it to our ground body
         boxBelka.dispose();                                // Clean up after ourselves
 
+
+        // kulka
+
+        Vector2[] vertices = new Vector2[4];
+        vertices[0] = new Vector2(10f, 0f);
+        vertices[1] = new Vector2(10f, 10f);
+        vertices[2] = new Vector2(0f, 10f);
+        vertices[3] = new Vector2(0f, 0f);
+
+        kulka = new PolygonShape();
+        kulka.set(vertices);
 
     }
 

@@ -20,13 +20,13 @@ public class BallText extends Ball {
     Texture textureBall;
     TextureRegion region;
 
-
     public BallText(World world) {
         super(world);
         this.agle = 0;
-        this.textureBall = new Texture("ball.png");
+        this.textureBall = new Texture("ballRed.png");
         this.h = textureBall.getHeight();
         region = new TextureRegion(textureBall);
+
 
     }
 
@@ -38,6 +38,7 @@ public class BallText extends Ball {
         this.h = textureBall.getHeight();
         region = new TextureRegion(textureBall);
 
+
     }
 
     @Override
@@ -47,21 +48,13 @@ public class BallText extends Ball {
         float x = this.body.getPosition().x;
         float y = this.body.getPosition().y;
 
-
-        this.agle = this.body.getAngle();
+        this.agle = this.body.getAngle() * 180f/ (float)Math.PI;
 
         // batch
         batch.begin();
         //batch.draw(textureBall, x-radius, y-radius, this.radius * 2.0f, this.radius * 2.0f);
         batch.draw(region, x-radius, y-radius, radius*(1f), radius*(1f), radius * 2.0f, radius * 2.0f, 1.0f, 1.0f, agle);
         batch.end();
-
-        // render
-        //renderer.begin(ShapeRenderer.ShapeType.Filled);
-        //renderer.setColor(color);
-        //renderer.circle(x,y,radius,64);
-        //renderer.end();
-
 
     }
 }

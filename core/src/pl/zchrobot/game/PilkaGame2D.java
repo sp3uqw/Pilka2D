@@ -63,6 +63,7 @@ public class PilkaGame2D extends ApplicationAdapter {
 
         // physicall objects
         wall = new Wall(Color.BLACK,H, W,world);
+
         // balls
         //b1 = new Ball( new Vector2(W/10, H-RADIUS), RADIUS, Color.GREEN, 5f,world );
         //b2 = new Ball( new Vector2(W/10*2, H-RADIUS), RADIUS, Color.RED, 1f, world );
@@ -72,7 +73,7 @@ public class PilkaGame2D extends ApplicationAdapter {
 
         for (int i = 0; i < ballT.length; i++)  ballT[i] = new BallText(world);
 
-        for (int i = 0; i < ball.length; i++)  ball[i] = new Ball(world);
+        //for (int i = 0; i < ball.length; i++)  ball[i] = new Ball(world);
 
 	}
 
@@ -83,7 +84,7 @@ public class PilkaGame2D extends ApplicationAdapter {
 		world.step(1/60f, 6, 2);
         float accelX = Gdx.input.getAccelerometerX();
         float accelY = Gdx.input.getAccelerometerY();
-        world.setGravity( new Vector2(accelY, -accelX) );
+        //world.setGravity( new Vector2(accelY, -accelX) );
 
 
         viewport.apply();
@@ -100,8 +101,10 @@ public class PilkaGame2D extends ApplicationAdapter {
         //b2.render(renderer, batch);
         //b3.render(renderer, batch);
 
+
+
         for (BallText b: ballT) b.render(renderer, batch);
-        for (Ball b: ball) b.render(renderer, batch);
+        //for (Ball b: ball) b.render(renderer, batch);
 
 
         batch.begin();
